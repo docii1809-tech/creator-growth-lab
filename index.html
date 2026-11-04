@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Free creator toolkit to analyze content performance, find repurposing opportunities, write platform-specific posts, and plan a week of publishing.">
+<title>Creator Growth Lab | Free Creator Toolkit</title>
+<style>
+:root{--ink:#18352d;--green:#173d32;--lime:#d7f36b;--paper:#f6f7f1;--white:#fff;--muted:#66766f;--line:#e2e8e1;--soft:#edf2e9;--orange:#e9a65a;--shadow:0 12px 35px rgba(23,61,50,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.shell{max-width:1180px;margin:auto;padding:22px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;letter-spacing:-.4px}
+.logo{width:42px;height:42px;border-radius:13px;background:var(--green);color:var(--lime);display:grid;place-items:center;font-size:21px}
+.pill{border:1px solid #dce6d9;background:#fff;border-radius:99px;padding:7px 12px;color:var(--muted);font-size:12px;font-weight:700}
+.hero{background:var(--green);color:#fff;border-radius:24px;padding:30px;display:grid;grid-template-columns:1.35fr .65fr;gap:24px;box-shadow:var(--shadow)}
+.eyebrow{color:var(--lime);font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.05;letter-spacing:-1.7px;margin:10px 0 12px}
+.hero p{color:#dce9e1;max-width:650px;margin:0 0 20px}
+.hero-stat{background:#214b3e;border:1px solid #3c6656;border-radius:18px;padding:20px;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.hero-stat strong{font-size:32px;color:var(--lime);letter-spacing:-1px}.hero-stat span{color:#dce9e1;font-size:13px}
+.btn{border:0;border-radius:11px;padding:11px 16px;font-weight:800;background:var(--lime);color:var(--green)}
+.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--green)}
+.btn.dark{background:var(--green);color:#fff}.btn.small{padding:8px 11px;font-size:12px}
+.tabs{display:flex;gap:8px;overflow:auto;padding:18px 0 14px}
+.tab{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--muted);padding:10px 14px;border-radius:12px;font-weight:750}
+.tab.active{background:var(--green);color:#fff;border-color:var(--green)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}
+.panel,.side-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.panel h2{font-size:22px;letter-spacing:-.6px;margin:0 0 5px}.sub{color:var(--muted);margin:0 0 20px;font-size:13px}
+.field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}
+label{font-size:12px;font-weight:800;color:#41564c}
+input,textarea,select{width:100%;border:1px solid #dce5dc;background:#fbfcf9;border-radius:10px;padding:11px 12px;color:var(--ink);outline:none}
+input:focus,textarea:focus,select:focus{border-color:#8da995;box-shadow:0 0 0 3px #e7efe7}
+textarea{min-height:105px;resize:vertical}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.result{margin-top:18px;background:#f7f9f4;border:1px solid var(--line);border-radius:14px;padding:16px;white-space:pre-wrap;min-height:50px}
+.result h3{margin:0 0 8px;font-size:14px}.result p{margin:6px 0}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.metric{background:var(--soft);border-radius:13px;padding:13px}.metric strong{display:block;font-size:23px;letter-spacing:-.6px}.metric span{font-size:11px;color:var(--muted);font-weight:750}
+.score{font-size:42px;font-weight:900;letter-spacing:-2px;color:var(--green)}
+.side-card{margin-bottom:14px}.side-card h3{margin:0 0 10px;font-size:15px}.side-card p,.side-card li{font-size:12px;color:var(--muted)}
+.side-card ul{padding-left:17px;margin:8px 0}
+.tip{padding:12px;border-radius:12px;background:#f5f8ed;font-size:12px;color:#506247}
+.hidden{display:none!important}
+.platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.platform{border:1px solid var(--line);border-radius:13px;padding:13px;background:#fff}
+.platform strong{display:block;margin-bottom:4px}.platform span{font-size:11px;color:var(--muted)}
+.plan-day{display:grid;grid-template-columns:72px 1fr auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.plan-day:last-child{border:0}.day{font-size:12px;font-weight:900;color:var(--green)}.plan-day input{max-width:100%}
+footer{text-align:center;color:#849087;font-size:11px;padding:24px 0}
+.notice{font-size:11px;color:var(--muted);margin-top:12px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.hero-stat{min-height:115px}}
+@media(max-width:560px){.shell{padding:13px}.hero{padding:22px}.panel{padding:16px}.field-grid{grid-template-columns:1fr}.platform-grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+  <div class="brand"><div class="logo">↗</div><span>CREATOR GROWTH LAB</span></div>
+  <span class="pill">FREE CREATOR TOOLKIT · VERSION 1.0</span>
+</header>
+<section class="hero">
+  <div><div class="eyebrow">Make every piece of content work harder</div>
+    <h1>One idea. A smarter week of content.</h1>
+    <p>Review your post performance, spot content worth developing, turn one idea into platform-specific drafts, and organize your next seven days.</p>
+    <button class="btn" onclick="showTab('scanner')">Start with the opportunity scanner →</button>
+  </div>
+  <div class="hero-stat"><strong>6 tools</strong><span>One simple workflow for independent creators on TikTok, YouTube and Facebook.</span></div>
+</section>
+<nav class="tabs" aria-label="Creator tools">
+  <button class="tab active" data-tab="scanner" onclick="showTab('scanner')">① Opportunity Scanner</button>
+  <button class="tab" data-tab="analyzer" onclick="showTab('analyzer')">② Performance Analyzer</button>
+  <button class="tab" data-tab="repurpose" onclick="showTab('repurpose')">③ Repurpose Content</button>
+  <button class="tab" data-tab="hooks" onclick="showTab('hooks')">④ Hook Improver</button>
+  <button class="tab" data-tab="planner" onclick="showTab('planner')">⑤ 7-Day Planner</button>
+  <button class="tab" data-tab="guide" onclick="showTab('guide')">⑥ How to Use</button>
+</nav>
+<div class="layout">
+<main>
+<section class="panel tool" id="scanner">
+  <h2>Content Opportunity Scanner</h2><p class="sub">Compare your posts against your own baseline. The tool highlights relative signals, not guaranteed reach or virality.</p>
+  <div class="field-grid">
+    <div class="field"><label>Typical views per post (your baseline)</label><input id="baseline" type="number" min="0" placeholder="e.g. 2500"></div>
+    <div class="field"><label>Platform</label><select id="scanPlatform"><option>TikTok</option><option>YouTube</option><option>Facebook</option></select></div>
+    <div class="field full"><label>Post 1 — topic or title</label><input id="topic1" placeholder="e.g. 3 mistakes new podcasters make"></div>
+    <div class="field"><label>Views</label><input id="views1" type="number" min="0" placeholder="5000"></div><div class="field"><label>Likes</label><input id="likes1" type="number" min="0" placeholder="180"></div>
+    <div class="field"><label>Comments</label><input id="comments1" type="number" min="0" placeholder="24"></div><div class="field"><label>Shares (optional)</label><input id="shares1" type="number" min="0" placeholder="12"></div>
+    <div class="field full"><label>Post 2 — topic or title</label><input id="topic2" placeholder="Another post topic"></div>
+    <div class="field"><label>Views</label><input id="views2" type="number" min="0" placeholder="3000"></div><div class="field"><label>Likes</label><input id="likes2" type="number" min="0" placeholder="210"></div>
+    <div class="field"><label>Comments</label><input id="comments2" type="number" min="0" placeholder="18"></div><div class="field"><label>Shares (optional)</label><input id="shares2" type="number" min="0" placeholder="20"></div>
+    <div class="field full"><label>Post 3 — topic or title</label><input id="topic3" placeholder="A third post topic"></div>
+    <div class="field"><label>Views</label><input id="views3" type="number" min="0" placeholder="1800"></div><div class="field"><label>Likes</label><input id="likes3" type="number" min="0" placeholder="60"></div>
+    <div class="field"><label>Comments</label><input id="comments3" type="number" min="0" placeholder="5"></div><div class="field"><label>Shares (optional)</label><input id="shares3" type="number" min="0" placeholder="3"></div>
+  </div>
+  <div class="actions"><button class="btn dark" onclick="scan()">Analyze my content</button><button class="btn secondary" onclick="clearScan()">Clear</button></div>
+  <div id="scanResult" class="result hidden" aria-live="polite"></div>
+  <p class="notice">Engagement rate here = (likes + comments + shares) ÷ views × 100. Platforms define and report metrics differently; compare like with like. Results are descriptive, not algorithm predictions.</p>
+</section>
+<section class="panel tool hidden" id="analyzer">
+  <h2>Post Performance Analyzer</h2><p class="sub">Calculate a post's basic engagement signals and compare it with your own typical post.</p>
+  <div class="field-grid">
+    <div class="field"><label>Post views</label><input id="aViews" type="number" min="0" placeholder="5000"></div>
+    <div class="field"><label>Your typical views</label><input id="aBase" type="number" min="0" placeholder="2500"></div>
+    <div class="field"><label>Likes</label><input id="aLikes" type="number" min="0" placeholder="200"></div>
+    <div class="field"><label>Comments</label><input id="aComments" type="number" min="0" placeholder="25"></div>
+    <div class="field"><label>Shares</label><input id="aShares" type="number" min="0" placeholder="15"></div>
+    <div class="field"><label>Saves (optional; include if available)</label><input id="aSaves" type="number" min="0" placeholder="10"></div>
+  </div>
+  <div class="actions"><button class="btn dark" onclick="analyzeOne()">Analyze post</button></div><div id="analyzeResult" class="result hidden"></div>
+</section>
+<section class="panel tool hidden" id="repurpose">
+  <h2>Repurpose One Idea</h2><p class="sub">Create distinct starting drafts for each platform. Edit them to match your voice and the actual content.</p>
+  <div class="field-grid">
+    <div class="field full"><label>Video / podcast topic</label><input id="rTopic" placeholder="e.g. How I started a podcast on a small budget"></div>
+    <div class="field full"><label>Key points, story or transcript excerpt</label><textarea id="rPoints" placeholder="Add 3–5 real points, examples, lessons or a short transcript excerpt. More detail creates more useful drafts."></textarea></div>
+    <div class="field"><label>Audience</label><input id="rAudience" placeholder="e.g. first-time podcasters"></div>
+    <div class="field"><label>Goal</label><select id="rGoal"><option>Start a conversation</option><option>Teach something useful</option><option>Drive viewers to the full episode</option><option>Build trust</option></select></div>
+    <div class="field full"><label>Call to action (optional)</label><input id="rCTA" placeholder="e.g. Follow for practical podcast tips"></div>
+  </div>
+  <div class="actions"><button class="btn dark" onclick="repurpose()">Create platform drafts</button><button class="btn secondary" onclick="copyEl('repurposeResult')">Copy all drafts</button></div>
+  <div id="repurposeResult" class="result hidden"></div>
+</section>
+<section class="panel tool hidden" id="hooks">
+  <h2>Hook & Headline Improver</h2><p class="sub">Generate alternative openings based on your actual topic. No promise of viral performance.</p>
+  <div class="field-grid">
+    <div class="field full"><label>Topic or current title</label><input id="hTopic" placeholder="e.g. How to record better podcast audio"></div>
+    <div class="field"><label>Platform</label><select id="hPlatform"><option>TikTok</option><option>YouTube</option><option>Facebook</option></select></div>
+    <div class="field"><label>Tone</label><select id="hTone"><option>Clear and practical</option><option>Curious</option><option>Bold but honest</option><option>Friendly and personal</option></select></div>
+  </div>
+  <div class="actions"><button class="btn dark" onclick="improveHooks()">Generate alternatives</button></div><div id="hookResult" class="result hidden"></div>
+</section>
+<section class="panel tool hidden" id="planner">
+  <h2>Your Seven-Day Publishing Planner</h2><p class="sub">A lightweight editable plan. Your changes are saved in this browser on this device.</p>
+  <div id="weekPlan"></div>
+  <div class="actions"><button class="btn dark" onclick="savePlan()">Save plan</button><button class="btn secondary" onclick="copyPlan()">Copy week</button><button class="btn secondary" onclick="resetPlan()">Reset suggestions</button></div>
+  <div id="planStatus" class="notice" aria-live="polite"></div>
+</section>
+<section class="panel tool hidden" id="guide">
+  <h2>How to get useful results</h2><p class="sub">A few guardrails that make this toolkit more honest and useful.</p>
+  <div class="tip"><strong>Start with real information.</strong> Add actual topics, examples, metrics and audience details. Generic inputs produce generic outputs.</div>
+  <p><strong>1. Scan.</strong> Enter at least two recent posts and your typical views. Look for promising signals, not guarantees.</p>
+  <p><strong>2. Choose.</strong> Pick one topic with a useful story, strong audience response or unanswered question.</p>
+  <p><strong>3. Repurpose.</strong> Add the real key points. The drafts are frameworks; review facts, platform rules and your own voice before publishing.</p>
+  <p><strong>4. Measure.</strong> Return with results after publishing. Compare similar posts over time rather than treating one result as proof.</p>
+  <p><strong>Privacy.</strong> This first version runs in your browser. Planner entries are saved locally on this device; the tool does not upload your metrics to a server.</p>
+  <p><strong>Limitations.</strong> It does not connect to TikTok, YouTube or Facebook accounts, retrieve live trends, inspect videos, or predict platform algorithms. Those would require separate integrations or research.</p>
+</section>
+</main>
+<aside>
+  <div class="side-card"><h3>Your workflow</h3><ul><li>Analyze recent posts</li><li>Choose a promising idea</li><li>Build platform drafts</li><li>Plan the week</li><li>Measure and repeat</li></ul></div>
+  <div class="side-card"><h3>Creator rule #1</h3><p>Use your own baseline. A post with fewer views can still show stronger interaction from the audience that saw it.</p></div>
+  <div class="side-card"><h3>What this tool won't do</h3><p>It won't promise virality, fabricate analytics, or claim to know secret platform algorithms. It helps you make clearer decisions with the information you provide.</p></div>
+  <div class="side-card"><h3>Built for</h3><div class="platform-grid"><div class="platform"><strong>TikTok</strong><span>Short-form</span></div><div class="platform"><strong>YouTube</strong><span>Videos & Shorts</span></div><div class="platform"><strong>Facebook</strong><span>Posts & Reels</span></div></div></div>
+</aside>
+</div>
+<footer>Creator Growth Lab · Free independent creator toolkit · Version 1.0</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+function showTab(id){document.querySelectorAll('.tool').forEach(x=>x.classList.add('hidden'));$(id).classList.remove('hidden');document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));window.scrollTo({top:document.querySelector('.tabs').offsetTop-8,behavior:'smooth'});}
+function num(id){return Math.max(0,Number($(id).value)||0)}
+function pct(n,d){return d>0?(n/d*100):0}
+function fmt(n){return n.toLocaleString(undefined,{maximumFractionDigits:2})}
+function scan(){
+ const base=num('baseline'), rows=[];
+ for(let i=1;i<=3;i++){const topic=$('topic'+i).value.trim(),views=num('views'+i),likes=num('likes'+i),comments=num('comments'+i),shares=num('shares'+i);if(topic&&views>0){const er=pct(likes+comments+shares,views);rows.push({topic,views,er,relative:base>0?views/base:0,interactions:likes+comments+shares});}}
+ const out=$('scanResult');out.classList.remove('hidden');
+ if(rows.length<2){out.textContent='Please enter at least two posts with a topic and views greater than zero.';return;}
+ rows.sort((a,b)=>b.er-a.er);
+ let s='YOUR CONTENT COMPARISON\\n\\n';
+ rows.forEach((r,i)=>{s+=`${i+1}. ${r.topic}\\n   Views: ${fmt(r.views)} · Engagement rate: ${fmt(r.er)}% · Interactions: ${fmt(r.interactions)}\\n`;if(base>0)s+=`   Views vs. your baseline: ${fmt(r.relative)}×\\n`;s+='\\n';});
+ s+='WHAT TO LOOK AT NEXT\\n';
+ const best=rows[0];s+=`• "${best.topic}" has the highest interaction rate among the posts entered. Review its subject, opening, audience and comments to understand what may have resonated.\\n`;
+ const viewLeader=[...rows].sort((a,b)=>b.views-a.views)[0];s+=`• "${viewLeader.topic}" received the most views. Check whether its topic or packaging is worth testing again.\\n`;
+ s+='• Read comments for unanswered questions; these can become follow-up posts.\\n• Treat this as a small-sample comparison, not proof that a topic will perform the same way again.';
+ out.textContent=s;
+}
+function clearScan(){['baseline','topic1','views1','likes1','comments1','shares1','topic2','views2','likes2','comments2','shares2','topic3','views3','likes3','comments3','shares3'].forEach(id=>$(id).value='');$('scanResult').classList.add('hidden')}
+function analyzeOne(){
+ const v=num('aViews'),base=num('aBase'),eng=num('aLikes')+num('aComments')+num('aShares')+num('aSaves'),rate=pct(eng,v),ratio=base?v/base:0;
+ const out=$('analyzeResult');out.classList.remove('hidden');
+ if(!v){out.textContent='Enter views greater than zero.';return;}
+ out.textContent=`POST SNAPSHOT\\n\\nEngagement actions entered: ${fmt(eng)}\\nEngagement rate: ${fmt(rate)}%\\n${base?`Views compared with your baseline: ${fmt(ratio)}×\\n`:''}\\nNEXT STEPS\\n• Review the comments and shares for questions or themes worth following up.\\n• Compare this post with similar posts on the same platform and format.\\n• Note the topic, opening, length and publishing context so you can test one change next time.\\n\\nThis simple rate uses the actions you entered divided by views. It is not necessarily the platform's official engagement metric.`;
+}
+function repurpose(){
+ const t=$('rTopic').value.trim(),p=$('rPoints').value.trim(),a=$('rAudience').value.trim()||'your target audience',g=$('rGoal').value,cta=$('rCTA').value.trim()||'Tell me what you think';
+ const out=$('repurposeResult');out.classList.remove('hidden');
+ if(!t||!p){out.textContent='Add a topic and real key points before generating drafts.';return;}
+ out.textContent=`SOURCE IDEA\\n${t}\\nAudience: ${a}\\nGoal: ${g}\\nKey points: ${p}\\n\\nTIKTOK / SHORT-FORM VIDEO\\nOpening: "If you're ${a}, here's something worth knowing about ${t.toLowerCase()}."\\nBeat 1: State the most useful point from your notes.\\nBeat 2: Give a concrete example: use one from your experience or source material.\\nBeat 3: Explain the practical takeaway.\\nCaption: ${t} — a practical takeaway for ${a}.\\nCTA: ${cta}\\n\\nYOUTUBE VIDEO / SHORTS\\nTitle option: ${t}: What ${a} should know\\nDescription: In this video, we cover ${t.toLowerCase()}. Key points: ${p}\\nShorts angle: Turn your strongest single point into a standalone 20–40 second explanation.\\nCTA: ${cta}\\n\\nFACEBOOK POST / REEL\\nPost: One thing worth discussing about ${t.toLowerCase()}: [insert your clearest point]. For ${a}, this matters because [explain why]. What has your experience been?\\nReel opening: "Let's make this simpler: ${t}."\\nCTA: ${cta}\\n\\nEDITOR'S CHECK\\nReplace bracketed prompts with real examples. Verify every claim, remove anything that doesn't sound like you, and adapt length and formatting to the current platform guidance.`;
+}
+function improveHooks(){
+ const t=$('hTopic').value.trim(),platform=$('hPlatform').value,tone=$('hTone').value,out=$('hookResult');out.classList.remove('hidden');
+ if(!t){out.textContent='Enter a topic or current title first.';return;}
+ const hooks=[`A practical way to think about ${t.toLowerCase()}`,`Before you try ${t.toLowerCase()}, consider this`, `3 things worth knowing about ${t.toLowerCase()}`,`The part of ${t.toLowerCase()} people often overlook`,`What I learned from ${t.toLowerCase()}`];
+ out.textContent=`${platform.toUpperCase()} — ${tone.toUpperCase()}\\n\\n`+hooks.map((h,i)=>`${i+1}. ${h}`).join('\\n')+`\\n\\nChoose the opening that accurately matches the content. Specific proof, a real example or a clear audience benefit will make it stronger than a vague curiosity hook.`;
+}
+const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const defaults=['Teach one practical tip','Share a short clip or key moment','Answer a question from your audience','Share a personal lesson or behind-the-scenes moment','Repurpose your strongest topic for another platform','Post a discussion question or opinion with context','Review results and outline next week'];
+function renderPlan(){const saved=JSON.parse(localStorage.getItem('cgl_plan')||'null')||defaults; $('weekPlan').innerHTML=days.map((d,i)=>`<div class="plan-day"><span class="day">${d}</span><input aria-label="${d} content plan" id="day${i}" value="${String(saved[i]||'').replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}"><span class="pill">Draft</span></div>`).join('');}
+function planValues(){return days.map((d,i)=>$('day'+i).value)}
+function savePlan(){localStorage.setItem('cgl_plan',JSON.stringify(planValues()));$('planStatus').textContent='Saved in this browser on this device.'}
+function copyPlan(){copyText(days.map((d,i)=>d+': '+$('day'+i).value).join('\\n'))}
+function resetPlan(){localStorage.removeItem('cgl_plan');renderPlan();$('planStatus').textContent='Default suggestions restored.'}
+function copyText(s){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(s).then(()=>alert('Copied to clipboard.')).catch(()=>fallbackCopy(s));}else fallbackCopy(s)}
+function fallbackCopy(s){const t=document.createElement('textarea');t.value=s;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();alert('Copied to clipboard.')}
+function copyEl(id){const el=$(id);copyText(el.innerText||el.textContent)}
+renderPlan();
+</script>
+</body></html>
