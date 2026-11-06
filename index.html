@@ -189,24 +189,4 @@ function repurpose(){
  const t=$('rTopic').value.trim(),p=$('rPoints').value.trim(),a=$('rAudience').value.trim()||'your target audience',g=$('rGoal').value,cta=$('rCTA').value.trim()||'Tell me what you think';
  const out=$('repurposeResult');out.classList.remove('hidden');
  if(!t||!p){out.textContent='Add a topic and real key points before generating drafts.';return;}
- out.textContent=`SOURCE IDEA\\n${t}\\nAudience: ${a}\\nGoal: ${g}\\nKey points: ${p}\\n\\nTIKTOK / SHORT-FORM VIDEO\\nOpening: "If you're ${a}, here's something worth knowing about ${t.toLowerCase()}."\\nBeat 1: State the most useful point from your notes.\\nBeat 2: Give a concrete example: use one from your experience or source material.\\nBeat 3: Explain the practical takeaway.\\nCaption: ${t} — a practical takeaway for ${a}.\\nCTA: ${cta}\\n\\nYOUTUBE VIDEO / SHORTS\\nTitle option: ${t}: What ${a} should know\\nDescription: In this video, we cover ${t.toLowerCase()}. Key points: ${p}\\nShorts angle: Turn your strongest single point into a standalone 20–40 second explanation.\\nCTA: ${cta}\\n\\nFACEBOOK POST / REEL\\nPost: One thing worth discussing about ${t.toLowerCase()}: [insert your clearest point]. For ${a}, this matters because [explain why]. What has your experience been?\\nReel opening: "Let's make this simpler: ${t}."\\nCTA: ${cta}\\n\\nEDITOR'S CHECK\\nReplace bracketed prompts with real examples. Verify every claim, remove anything that doesn't sound like you, and adapt length and formatting to the current platform guidance.`;
-}
-function improveHooks(){
- const t=$('hTopic').value.trim(),platform=$('hPlatform').value,tone=$('hTone').value,out=$('hookResult');out.classList.remove('hidden');
- if(!t){out.textContent='Enter a topic or current title first.';return;}
- const hooks=[`A practical way to think about ${t.toLowerCase()}`,`Before you try ${t.toLowerCase()}, consider this`, `3 things worth knowing about ${t.toLowerCase()}`,`The part of ${t.toLowerCase()} people often overlook`,`What I learned from ${t.toLowerCase()}`];
- out.textContent=`${platform.toUpperCase()} — ${tone.toUpperCase()}\\n\\n`+hooks.map((h,i)=>`${i+1}. ${h}`).join('\\n')+`\\n\\nChoose the opening that accurately matches the content. Specific proof, a real example or a clear audience benefit will make it stronger than a vague curiosity hook.`;
-}
-const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-const defaults=['Teach one practical tip','Share a short clip or key moment','Answer a question from your audience','Share a personal lesson or behind-the-scenes moment','Repurpose your strongest topic for another platform','Post a discussion question or opinion with context','Review results and outline next week'];
-function renderPlan(){const saved=JSON.parse(localStorage.getItem('cgl_plan')||'null')||defaults; $('weekPlan').innerHTML=days.map((d,i)=>`<div class="plan-day"><span class="day">${d}</span><input aria-label="${d} content plan" id="day${i}" value="${String(saved[i]||'').replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}"><span class="pill">Draft</span></div>`).join('');}
-function planValues(){return days.map((d,i)=>$('day'+i).value)}
-function savePlan(){localStorage.setItem('cgl_plan',JSON.stringify(planValues()));$('planStatus').textContent='Saved in this browser on this device.'}
-function copyPlan(){copyText(days.map((d,i)=>d+': '+$('day'+i).value).join('\\n'))}
-function resetPlan(){localStorage.removeItem('cgl_plan');renderPlan();$('planStatus').textContent='Default suggestions restored.'}
-function copyText(s){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(s).then(()=>alert('Copied to clipboard.')).catch(()=>fallbackCopy(s));}else fallbackCopy(s)}
-function fallbackCopy(s){const t=document.createElement('textarea');t.value=s;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();alert('Copied to clipboard.')}
-function copyEl(id){const el=$(id);copyText(el.innerText||el.textContent)}
-renderPlan();
-</script>
-</body></html>
+ out.textContent=`SOURCE IDEA\\n${t}\\nAudience: ${a}\\nGoal: ${g}\\nKey points: ${p}\\n\\nTIKTOK / SHORT-FORM VIDEO\\nOpening: "If you're ${a}, here's something worth knowing about ${t.toLowerCase()}."\\nBeat 1: State the most useful point from your notes.\\nBeat 2: Give a concrete example: use one from your experience or source material.\\nBeat 3: Explain the practical takeaway.\\nCaption: ${t} — a practical takeaway for ${a}.\\nCTA: ${cta}\\n\\nYOUTUBE VIDEO / SHORTS\\nTitle option: ${t}: What ${a} should know\\nDescription: In this video, we cover ${t.toLowerCase()}. Key points: ${p}\\nShorts angle: Turn your strongest single point into a standalone 20–40 second explanation.\\nCTA: ${cta}\\n\\nFACEBOOK POST / REEL\\nPost:
